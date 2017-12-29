@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tic-Tac-Toe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/index.css" />
+</head>
+
+<body>
+    <header>Tic-Tac-Toe</header>
+
+    <div>
+        <h1 id="status"></h1>
+        <table>
+            <tr>
+                <td id="b1" onclick="clickevent(this)"></td>
+                <td id="b2" onclick="clickevent(this)"></td>
+                <td id="b3" onclick="clickevent(this)"></td>
+            </tr>
+
+            <tr>
+                <td id="b4" onclick="clickevent(this)"></td>
+                <td id="b5" onclick="clickevent(this)"></td>
+                <td id="b6" onclick="clickevent(this)"></td>
+            </tr>
+            <tr>
+                <td id="b7" onclick="clickevent(this)"></td>
+                <td id="b8" onclick="clickevent(this)"></td>
+                <td id="b9" onclick="clickevent(this)"></td>
+            </tr>
+        </table>
+    </div>
+
+    <button type="button" onclick="reset()">Play Again!</button>
+    <button type="button" onclick="exit()">Exit</button>
+
+    <script src="js/index.js"></script>    
+</body>
+
+</html>
