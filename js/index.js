@@ -38,20 +38,20 @@ function selectLevel(levelselect) {
 function startComputerMode() {
     whichMode = "Computer";
 
-        if (Math.random() < 0.5) {
-            msg = "X";
-            setStatus("You will start.");
-        } else {
-            msg = "O";
-            setStatus("Computer will start.");
+    if (Math.random() < 0.5) {
+        msg = "X";
+        setStatus("You will start.");
+    } else {
+        msg = "O";
+        setStatus("Computer will start.");
 
-            alldisable();
+        alldisable();
 
-            setTimeout(function () {
-                computerMove()
-            }, 700);
-            // computerMove();
-        }
+        setTimeout(function () {
+            computerMove()
+        }, 700);
+        // computerMove();
+    }
 }
 
 function randomPos() {
