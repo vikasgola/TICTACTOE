@@ -1,10 +1,22 @@
-function gameWindow() {
-    game = document.getElementById("game");
-    mode = document.getElementById("mode");
+var game = document.getElementById("game");
+var mode = document.getElementById("mode");
+var level = document.getElementById("level");
+var state = document.getElementById("status");
 
+function personWindow() {
     mode.style.display = "none";
     game.style.display = "block";
-    state = document.getElementById("status");
+}
+
+function computerWindow() {
+    level.style.display = "none";
+    game.style.display = "block";
+    startComputerMode();
+}
+
+function levelSelectWindow() {
+    mode.style.display = "none";
+    level.style.display = "block";
 }
 
 function start2PlayerMode() {
@@ -20,43 +32,69 @@ function start2PlayerMode() {
 
 }
 
+function selectLevel(levelselect) {
+    selectedLevel = levelselect.innerText;
+}
+
 function startComputerMode() {
     whichMode = "Computer";
 
-    if (Math.random() < 0.5) {
-        msg = "X";
-        setStatus("You will start.");
+    // ---------------------------------------------have to remove this next line
+    if (selectedLevel == "Begginner") {
+        if (Math.random() < 0.5) {
+            msg = "X";
+            setStatus("You will start.");
+        } else {
+            msg = "O";
+            setStatus("Computer will start.");
+
+            alldisable();
+
+            setTimeout(function () {
+                computerMove()
+            }, 700);
+            // computerMove();
+        }
     } else {
-        msg = "O";
-        setStatus("Computer will start.");
-
-        alldisable();
-
-        setTimeout(function () {
-            computerMove()
-        }, 700);
-        // computerMove();
+        document.getElementById("mainTable").style.display = "none";
+        setStatus("In Developement!");
     }
 }
 
 function randomPos() {
     var select = (Math.random() * 9) + 1;
-    // console.log(select);
+    // console.log(select); 
     return document.getElementById("b" + Math.floor(select));
 }
 
-function computerMove() {
+function begginner() {
     x = randomPos();
-    while ( x.innerText != "" ) {
+    while (x.innerText != "") {
         x = randomPos();
     }
     x.innerText = "O";
+}
+
+function intermediate() {}
+
+function hard() {}
+
+function computerMove() {
+
+    if (selectedLevel == "Begginner") {
+        begginner();
+    } else if (selectedLevel == "Intermediate") {
+        intermediate();
+    } else if (selectedLevel == "Hard") {
+        hard();
+    }
+
     if (!checkForWinner() && !draw()) {
         setStatus("Your turn.")
         msg = "X";
     }
     for (var i = 1; i < 10; i++) {
-        document.getElementById("b" + i).style.pointerEvents="auto";
+        document.getElementById("b" + i).style.pointerEvents = "auto";
     }
 
 }
@@ -132,14 +170,14 @@ function checkForWinner() {
     if (areEqual(1, 2, 3) || areEqual(4, 5, 6) || areEqual(7, 8, 9) ||
         areEqual(1, 4, 7) || areEqual(2, 5, 8) || areEqual(3, 6, 9) ||
         areEqual(1, 5, 9) || areEqual(3, 5, 7)) {
-        if(whichMode=="Computer"){
-            if(msg=="X"){
+        if (whichMode == "Computer") {
+            if (msg == "X") {
                 setStatus("Congrats, You won!");
+            } else {
+                setStatus("Sorry, You Lose!");
             }
-            else{
-                setStatus("Sorry, You Lose!");            }
-        } else{
-            setStatus(msg + " won");
+        } else {
+            setStatus("Congrats, " + msg + " won");
         }
         return true;
     }
@@ -174,8 +212,8 @@ function back() {
     }
 }
 
-function alldisable(){
+function alldisable() {
     for (var i = 1; i < 10; i++) {
-        document.getElementById("b" + i).style.pointerEvents="none";
+        document.getElementById("b" + i).style.pointerEvents = "none";
     }
 }

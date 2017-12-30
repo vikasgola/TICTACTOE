@@ -13,14 +13,20 @@
     <header>Tic-Tac-Toe</header>
 
     <div id="mode">
-        <h1>Select your Mode.</h1>
-        <button type="button" onclick="gameWindow();start2PlayerMode();">Two Players</button>
-        <button type="button" onclick="gameWindow();startComputerMode()">Computer</button>
+        <h1>Select Opponent.</h1>
+        <button type="button" onclick="personWindow();start2PlayerMode();">Person</button>
+        <button type="button" onclick="levelSelectWindow();">Computer</button>
+    </div>
+
+    <div id="level">
+        <button type="button" onclick="selectLevel(this);computerWindow();">Begginner</button>
+        <button type="button" onclick="selectLevel(this);computerWindow();">Intermediate</button>
+        <button type="button" onclick="selectLevel(this);computerWindow();">Hard</button>
     </div>
 
     <div id="game">
         <h1 id="status"></h1>
-        <table>
+        <table id="mainTable">
             <tr>
                 <td id="b1" onclick="clickevent(this)"></td>
                 <td id="b2" onclick="clickevent(this)"></td>
