@@ -7,5 +7,6 @@ Enjoy!
 ## You can play here
 [TicTacToe](https://vikasgola.github.io/TICTACTOE)
 
+## Screenshots
 <img src="screenshot2.png"/>
 <img src="screenshot1.png"/>
