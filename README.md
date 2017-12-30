@@ -1,6 +1,6 @@
 # TICTACTOE
 This is TicTacToe game in JavaScript which can be played in any browser. 
-You can play against person or computer. This is having computer mode with 3 different levels easy, medium and infinity.
+You can play against person or computer. This is having computer mode with 3 different levels Beginner, Intermediate and Hard.
 You can play this game online on the below given link. 
 Enjoy! 
 

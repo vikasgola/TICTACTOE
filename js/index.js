@@ -17,6 +17,7 @@ function computerWindow() {
 function levelSelectWindow() {
     mode.style.display = "none";
     level.style.display = "block";
+    document.getElementById("back2").style.display = "block";
 }
 
 function start2PlayerMode() {
@@ -33,6 +34,7 @@ function start2PlayerMode() {
 
 function selectLevel(levelselect) {
     selectedLevel = levelselect.innerText;
+    document.getElementById("back2").style.display = "none";
 }
 
 function startComputerMode() {
@@ -56,7 +58,7 @@ function startComputerMode() {
 
 function randomPos() {
     var select = (Math.random() * 9) + 1;
-    // console.log(select); 
+    console.log(select);
     return document.getElementById("b" + Math.floor(select));
 }
 
@@ -68,7 +70,49 @@ function beginner() {
     x.innerText = "O";
 }
 
-function intermediate() {}
+function checkCombination(x, y, z, fill, notBlank) {
+    if (areEqual(x, y, z) && getPos(fill) == "" && getPos(notBlank) != "") {
+        msg = "O";
+        setPos(fill).innerText = msg;
+        return true;
+    }
+    return false;
+}
+
+function intermediate() {
+    msg = "X";
+    for (var j = 1; j <= 3; j++) {
+        if (checkCombination(j, j + 3, j + 3, j + 6, j)) {
+            return;
+        } else if (checkCombination(j + 3, j + 3, j + 6, j, j + 3)) {
+            return;
+        } else if (checkCombination(j, j, j + 6, j + 3, j + 6)) {
+            return;
+        }
+    }
+
+    for (var j = 1; j <= 9; j += 3) {
+        if (checkCombination(j, j + 1, j + 1, j + 2, j)) {
+            return;
+        } else if (checkCombination(j + 1, j + 1, j + 2, j, j + 1)) {
+            return;
+        } else if (checkCombination(j, j, j + 2, j + 1, j + 2)) {
+            return;
+        }
+    }
+
+    if (checkCombination(1, 5, 5, 9, 1)) return;
+    if (checkCombination(5, 5, 9, 1, 5)) return;
+    if (checkCombination(1, 1, 9, 5, 9)) return;
+
+    if (checkCombination(3, 5, 5, 7, 3)) return;
+    if (checkCombination(5, 5, 7, 3, 5)) return;
+    if (checkCombination(3, 3, 7, 5, 7)) return;
+
+    beginner();
+    msg = "O";
+
+}
 
 function hard() {}
 
@@ -147,6 +191,10 @@ function getPos(k) {
     return document.getElementById("b" + k).innerText;
 }
 
+function setPos(k) {
+    return document.getElementById("b" + k);
+}
+
 function setStatus(message) {
     state.innerText = message;
 }
@@ -198,11 +246,23 @@ function reset() {
 }
 
 function back() {
-    game.style.display = "none";
-    mode.style.display = "block";
+    if (whichMode == "2Player") {
+        game.style.display = "none";
+        mode.style.display = "block";
+    } else {
+        game.style.display = "none";
+        level.style.display = "block";
+        document.getElementById("back2").style.display = "block";
+    }
     for (var i = 1; i < 10; i++) {
         document.getElementById("b" + i).innerText = "";
     }
+}
+
+function back2() {
+    level.style.display = "none";
+    mode.style.display = "block";
+    document.getElementById("back2").style.display = "none";
 }
 
 function alldisable() {
