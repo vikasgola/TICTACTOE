@@ -40,7 +40,7 @@ function startComputerMode() {
     whichMode = "Computer";
 
     // ---------------------------------------------have to remove this next line
-    if (selectedLevel == "Begginner") {
+    if (selectedLevel == "Beginner") {
         if (Math.random() < 0.5) {
             msg = "X";
             setStatus("You will start.");
@@ -67,7 +67,7 @@ function randomPos() {
     return document.getElementById("b" + Math.floor(select));
 }
 
-function begginner() {
+function beginner() {
     x = randomPos();
     while (x.innerText != "") {
         x = randomPos();
@@ -81,8 +81,8 @@ function hard() {}
 
 function computerMove() {
 
-    if (selectedLevel == "Begginner") {
-        begginner();
+    if (selectedLevel == "Beginner") {
+        beginner();
     } else if (selectedLevel == "Intermediate") {
         intermediate();
     } else if (selectedLevel == "Hard") {
