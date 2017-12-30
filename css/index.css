@@ -62,7 +62,6 @@ button{
 
 #level button:hover{
     background: rgb(201, 200, 200);
-    height: 170px;
     width: 100%;
     color: #000000;
 }

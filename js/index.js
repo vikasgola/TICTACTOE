@@ -21,7 +21,7 @@ function levelSelectWindow() {
 
 function start2PlayerMode() {
     whichMode = "2Player";
-
+    document.getElementById("mainTable").style.display = "block";
     if (Math.random() < 0.5) {
         msg = "X";
         setStatus(msg + " gets start.");
