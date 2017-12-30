@@ -21,7 +21,6 @@ function levelSelectWindow() {
 
 function start2PlayerMode() {
     whichMode = "2Player";
-    document.getElementById("mainTable").style.display = "block";
     if (Math.random() < 0.5) {
         msg = "X";
         setStatus(msg + " gets start.");
@@ -39,8 +38,6 @@ function selectLevel(levelselect) {
 function startComputerMode() {
     whichMode = "Computer";
 
-    // ---------------------------------------------have to remove this next line
-    if (selectedLevel == "Beginner") {
         if (Math.random() < 0.5) {
             msg = "X";
             setStatus("You will start.");
@@ -55,10 +52,6 @@ function startComputerMode() {
             }, 700);
             // computerMove();
         }
-    } else {
-        document.getElementById("mainTable").style.display = "none";
-        setStatus("In Developement!");
-    }
 }
 
 function randomPos() {
