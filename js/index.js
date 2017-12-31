@@ -58,16 +58,7 @@ function startComputerMode() {
 
 function randomPos() {
     var select = (Math.random() * 9) + 1;
-    console.log(select);
     return document.getElementById("b" + Math.floor(select));
-}
-
-function beginner() {
-    x = randomPos();
-    while (x.innerText != "") {
-        x = randomPos();
-    }
-    x.innerText = "O";
 }
 
 function checkCombination(x, y, z, fill, notBlank) {
@@ -79,42 +70,123 @@ function checkCombination(x, y, z, fill, notBlank) {
     return false;
 }
 
-function intermediate() {
-    msg = "X";
+function checkCombinationGroup() {
     for (var j = 1; j <= 3; j++) {
         if (checkCombination(j, j + 3, j + 3, j + 6, j)) {
-            return;
+            return true;
         } else if (checkCombination(j + 3, j + 3, j + 6, j, j + 3)) {
-            return;
+            return true;
         } else if (checkCombination(j, j, j + 6, j + 3, j + 6)) {
-            return;
+            return true;
         }
     }
 
     for (var j = 1; j <= 9; j += 3) {
         if (checkCombination(j, j + 1, j + 1, j + 2, j)) {
-            return;
+            return true;
         } else if (checkCombination(j + 1, j + 1, j + 2, j, j + 1)) {
-            return;
+            return true;
         } else if (checkCombination(j, j, j + 2, j + 1, j + 2)) {
-            return;
+            return true;
         }
     }
 
-    if (checkCombination(1, 5, 5, 9, 1)) return;
-    if (checkCombination(5, 5, 9, 1, 5)) return;
-    if (checkCombination(1, 1, 9, 5, 9)) return;
+    if (checkCombination(1, 5, 5, 9, 1)) return true;
+    if (checkCombination(5, 5, 9, 1, 5)) return true;
+    if (checkCombination(1, 1, 9, 5, 9)) return true;
 
-    if (checkCombination(3, 5, 5, 7, 3)) return;
-    if (checkCombination(5, 5, 7, 3, 5)) return;
-    if (checkCombination(3, 3, 7, 5, 7)) return;
+    if (checkCombination(3, 5, 5, 7, 3)) return true;
+    if (checkCombination(5, 5, 7, 3, 5)) return true;
+    if (checkCombination(3, 3, 7, 5, 7)) return true;
 
-    beginner();
-    msg = "O";
+    return false;
+}
+
+function winCombinationGroup(p, q, r) {
+    if (getPos(p) == "" && getPos(q) == "" && getPos(r) == msg) {
+        if (Math.random() < 0.5) {
+            setPos(p).innerText = msg;
+        } else {
+            setPos(q).innerText = msg;
+        }
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function tryForWinCombination() {
+
+    if (winCombinationGroup(9, 5, 1)) return true;
+    if (winCombinationGroup(7, 5, 3)) return true;
+    if (winCombinationGroup(9, 1, 5)) return true;
+
+    if (winCombinationGroup(7, 3, 5)) return true;
+    if (winCombinationGroup(5, 1, 9)) return true;
+    if (winCombinationGroup(5, 3, 7)) return true;
+
+    for (var j = 1; j <= 9; j += 3) {
+        if (winCombinationGroup(j + 2, j + 1, j)) {
+            return true;
+        } else if (winCombinationGroup(j + 2, j, j + 1)) {
+            return true;
+        } else if (winCombinationGroup(j + 1, j, j + 2)) {
+            return true;
+        }
+    }
+
+    for (var j = 1; j <= 3; j++) {
+        if (winCombinationGroup(j + 6, j + 3, j)) {
+            return true;
+        } else if (winCombinationGroup(j + 6, j, j + 3)) {
+            return true;
+        } else if (winCombinationGroup(j + 3, j, j + 6)) {
+            return true;
+        }
+    }
+
+    return false;
 
 }
 
-function hard() {}
+function beginner() {
+    x = randomPos();
+    while (x.innerText != "") {
+        x = randomPos();
+    }
+    x.innerText = "O";
+}
+
+function intermediate() {
+
+    if (checkCombinationGroup()) {
+        return;
+    }
+    msg = "X";
+    if (checkCombinationGroup()) {
+        return;
+    } else {
+        beginner();
+        msg = "O";
+    }
+}
+
+function hard() {
+    if (checkCombinationGroup()) {
+        return;
+    }
+    msg = "X";
+    if (checkCombinationGroup()) {
+        return;
+    } else {
+        msg = "O";
+        if (tryForWinCombination()) {
+            return;
+        } else {
+            beginner();
+        }
+    }
+}
 
 function computerMove() {
 
@@ -185,6 +257,22 @@ function Computer(clicked) {
             }
         }
     }
+}
+
+function firstMove() {
+    var count = 0;
+    var countPos = 0;
+    for (var k = 1; k <= 9; k++) {
+        if (getPos(k) != "") {
+            countPos = k;
+            count++;
+        }
+    }
+
+    if (count == 1)
+        return countPos;
+    else
+        return false;
 }
 
 function getPos(k) {
